@@ -9,13 +9,29 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
 
     if len(nums) == 0:
         raise ValueError
+
+    mn, mx = nums[0], nums[0]
+    for x in nums[1:]:
+        if x < mn:
+            mn = x
+        if x > mx:
+            mx = x
     
-    return (min(nums), max(nums))
+    return (mn, mx)
 
 def unique_sorted(nums: list[float | int]) -> list[float | int]:
     """Возвращает отсортированный список уникальных значений (по возрастанию)."""
 
-    return sorted(set(nums))
+    result = list(set(nums))
+
+    for i in range(1, len(result)):
+        for j in range(i-1, -1, -1):
+            if result[j] > result[j+1]:
+                result[j], result[j+1] = result[j+1], result[j]
+            else:
+                break
+
+    return result
 
 def flatten(mat: list[list | tuple]) -> list:
     """«Расплющивает» список списков/кортежей в один список по строкам (row-major). Если встретилась строка/элемент, который не является списком/кортежем — TypeError."""
@@ -212,14 +228,25 @@ test_matrix()
 type student = tuple[str, str, float]
 
 def format_record(rec: student) -> str:
-    """Возвращает строку вида: 'Иванов И.И., гр. BIVT-25, GPA 4.60'. Некорректное/пустое ФИО, пустая группа или неверный GPA — ValueError"""
+    """Возвращает строку вида: 'Иванов И.И., гр. BIVT-25, GPA 4.60'. Неверный тип входных данных — TypeError. Некорректное/пустое ФИО, пустая группа или неверный GPA — ValueError."""
 
-    if rec[0] == '' or rec[1] == '' or rec[2] < 0 or rec[2] > 5:
-        raise ValueError
+    if type(rec) != tuple:
+        raise TypeError('rec is not tuple')
+    if len(rec) != 3:
+        raise ValueError('rec does not consists of 3 elements')
+    if type(rec[0]) != str or type(rec[1]) != str or type(rec[2]) != float:
+        raise TypeError('invalid type of inner value of rec')
+    if rec[0] == '':
+        raise ValueError('Full name is empty')
+    if rec[1] == '':
+        raise ValueError('Group is empty')
+    if rec[2] < 0 or rec[2] > 5:
+        raise ValueError('Invalid GPA')
+    
 
     fio = rec[0].split()
     if len(fio) < 2 or len(fio) > 3:
-        raise ValueError
+        raise ValueError('Full name does not consists of 2 elements')
 
     fio[0] = fio[0][0].upper() + fio[0][1:]
     fio[1] = fio[1][0].upper() + '.'
