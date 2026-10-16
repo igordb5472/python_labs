@@ -80,12 +80,15 @@ write_csv(top, path='data/lab04/output.csv', header=('word', 'count'))
 python -m src.lab04.text_report
 ```
 2) С параметрами командной строки ("--input" — путь к файлу с входными данными, "--encoding" — кодировка файла с входными данными)
+```cmd
+python -m src.lab04.text_report --input data/lab04/input.txt --encoding cp1251
+```
 
 Запуск с обычными входными данными:
 ![](../../images/lab04/test_basic.png)
 
 Запуск с пустыми входными данными:
-![](../../images/lab03/test_empty.png)
+![](../../images/lab04/test_empty.png)
 
 Запуск с входными данными в кодировке cp1251:
-![](../../images/lab03/test_cp1251.png)
+![](../../images/lab04/test_cp1251.png)
