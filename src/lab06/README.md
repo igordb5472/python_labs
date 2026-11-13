@@ -50,7 +50,10 @@ if __name__ == "__main__":
     main()
 ```
 
-Тест cli_text:
+Справка по cli_text.py:
+![](../../images/lab06/cli_text_help.png)
+
+Тест cli_text.py:
 ![](../../images/lab06/cli_text.png)
 
 ### Задание 2
@@ -95,7 +98,10 @@ if __name__ == "__main__":
     main()
 ```
 
-Тест cli_convert:
+Справка по cli_convert.py:
+![](../../images/lab06/cli_convert_help.png)
+
+Тест cli_convert.py:
 1) json → csv:
 ![](../../images/lab06/json2csv.png)
 2) csv → json:
